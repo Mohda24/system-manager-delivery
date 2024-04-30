@@ -143,3 +143,20 @@ table .data:hover span{
 .modal-content{
     padding: 20px !important;
 }
+/* offcanvas */
+form.update input{
+    border-radius: 10px !important;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    -ms-border-radius: 10px !important;
+    -o-border-radius: 10px !important;
+    max-width: 70%;
+}
+form.update select{
+    width: 65% !important;
+    border-radius: 10px !important;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    -ms-border-radius: 10px !important;
+    -o-border-radius: 10px !important;
+}

@@ -2,6 +2,13 @@
 window.onload = function() {
     displaydata();
 };
+// Delete Alert
+function deletealert(){
+    let prob = document.querySelector(".offcanvas .prob_modify");
+    prob.innerHTML = "";
+    prob.classList.remove("alert", "alert-danger", "text-center", "p-2");
+
+};
 // menu
 // Menu Toggle
 let menu = document.querySelector(".tagle");
@@ -98,6 +105,9 @@ function displaydata(){
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0 fw-bold ${type}">${element["statu"]}</span></td>
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0">${element["prix"]}</span></td>
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0">${element["seller"]}</span></td>
+                        <td><span class=" border border-1 border-primary border-start-0 border-end-0 last">
+                        <i class="fa-solid fa-pen-to-square fs-5 text-primary" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop" onclick="update(${element["id_client"]})"></i>
+                        <i class="fa-solid fa-trash ms-2 me-1 text-danger fs-5" onclick="delete(${element["id_client"]})"></i></span></td>
                     </tr>`
             });
             tbody.innerHTML=mydata
@@ -157,4 +167,76 @@ function logout(){
     xml.send()
 
 }
+// function of show data in off canvas
+function update(elem){
+    let xml = new XMLHttpRequest();
+    xml.onload=function(){
+        if(this.status===200){
+            data=JSON.parse(this.responseText)
+            console.log(data);
+            document.querySelector(".offcanvas .name input").value=data.nom_client;
+            document.querySelector(".offcanvas .tel input").value=data.tel_client;
+            document.querySelector(".offcanvas .Adresse input").value=data.adres_client;
+            document.querySelector(".offcanvas .Qnt input").value=data.Qnt;
+            document.querySelector(".offcanvas .statu select").value=data.statu;
+            document.querySelector(".offcanvas .Prix input").value=data.prix;
+            document.querySelector(".offcanvas .Seller select").value=data.seller;
+            document.querySelector(".offcanvas .id_client").value=data.id_client;
+            
+
+        }
+    }
+    
+    xml.open("GET","./config/update.php?id="+elem)
+    xml.send();
+}
+function modify(){
+    let id =document.querySelector(".offcanvas .id_client").value;
+    let nom_client=document.querySelector(".offcanvas .name input").value;
+    let tel_client=document.querySelector(".offcanvas .tel input").value;
+    let adres_client=document.querySelector(".offcanvas .Adresse input").value;
+    let Qnt=document.querySelector(".offcanvas .Qnt input").value;
+    let statu=document.querySelector(".offcanvas .statu select").value;
+    let prix=document.querySelector(".offcanvas .Prix input").value;
+    let seller=document.querySelector(".offcanvas .Seller select").value;
+    if(!nom_client || !tel_client || !adres_client || ! Qnt || ! statu || ! prix || ! seller){
+        let prob=document.querySelector(".offcanvas .prob_modify")
+        prob.innerHTML="Please fill in all required fields"
+        prob.classList.add("alert")
+        prob.classList.add("alert-danger")
+        prob.classList.add("text-center")
+        prob.classList.add("p-2")
+        return;
+    }
+    var mydata = {
+        id:id,
+        nom_client:nom_client,
+        tel_client:tel_client,
+        adres_client:adres_client,
+        Qnt:Qnt,
+        statu:statu,
+        prix:prix,
+        seller:seller
+        };
+        let data=JSON.stringify(mydata)
+    xml = new XMLHttpRequest();
+    xml.open("POST","./config/modify.php");
+    xml.onload = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            displaydata();
+            
+            
+        }}
+xml.setRequestHeader("Content-Type","application/json");
+xml.send(data);
+
+}
+// close 
+function close(){
+    let prob = document.querySelector(".offcanvas .prob_modify");
+    prob.innerHTML = "";
+    prob.classList.remove("alert", "alert-danger", "text-center", "p-2");
+
+};
+
 

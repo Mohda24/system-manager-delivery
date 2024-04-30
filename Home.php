@@ -154,7 +154,7 @@ if($_SESSION['user']){
                         </form>
                     </tr>
                     <!-- START DISPLAY DATA -->
-                    <tr class="data">
+                    <!-- <tr class="data">
                         <td><span class="first border border-1 border-primary border-end-0">Hello</span></td>
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0">hddh</span></td>
                         <td><span class="border border-1 border-primary border-start-0 border-end-0">hddh</span></td>
@@ -163,7 +163,7 @@ if($_SESSION['user']){
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0">hddh</span></td>
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0">hddh</span></td>
                         <td><span class="last border border-1 border-primary border-start-0">hdhd</span></td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
             <h1 class="fs-1 text-capitalize text-center">NO data</h1>
@@ -186,6 +186,59 @@ if($_SESSION['user']){
                     <a  onclick="logout()" class="btn btn-primary py-1 px-2 fw-bold">Logout</a>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- Offcanvas -->
+    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+        <div class="offcanvas-header p-3">
+            <h5 class="offcanvas-title text-capitalize fw-bold" id="staticBackdropLabel">Modify Data</h5>
+            <button type="button" class="btn-close" onclick="deletealert() "data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-3">
+            <p class="prob_modify"></p>
+            <form class="update d-flex flex-column p-3">
+                <div class="name d-flex justify-content-between align-items-center mb-3">
+                    <label for="name" class="fw-semibold fs-5">Name :</label>
+                    <input type="text" name="name" class="py-2 px-3 w-auto border border-1 border-primary" placeholder="enter ur name">
+                </div>
+                <div class="tel d-flex justify-content-between align-items-center mb-3">
+                    <label for="tel" class="fw-semibold fs-5">Tel :</label>
+                <input type="text" name="tel" class="py-2 px-3 w-auto border border-1 border-primary" placeholder="enter ur Phone">
+                </div>
+                <div class="Adresse d-flex justify-content-between align-items-center mb-3">
+                    <label for="Adresse" class="fw-semibold fs-5">Adresse :</label>
+                    <input type="text" class="py-2 px-3 w-auto border border-1 border-primary" name="Adresse" placeholder="enter ur Adresse">
+                </div>
+                <div class="Qnt d-flex justify-content-between align-items-center mb-3">
+                    <label for="Qnt" class="fw-semibold fs-5">Qnt :</label>
+                    <input type="number" min="1" class="py-2 px-3 w-auto border border-1 border-primary" name="Qnt" placeholder="enter Qnt">
+                </div>
+                <div class="statu d-flex justify-content-between align-items-center mb-3">
+                    <label for="statu" class="fw-semibold fs-5">Statu :</label>
+                    <select name="statu" class="py-2 px-3 w-auto border border-1 border-primary text-center">
+                            <option selected value="en coeur">en coeur</option>
+                            <option value="Livré">Livré</option>
+                            <option value="retourné">retourné</option>
+                    </select>
+                </div>
+                <div class="Prix d-flex justify-content-between align-items-center mb-3">
+                    <label for="prix" class="fw-semibold fs-5">prix :</label>
+                    <input type="number" min="0" class="py-2 px-3 w-auto border border-1 border-primary" name="prix" placeholder="enter Prix">
+                </div>
+                <div class="Seller d-flex justify-content-between align-items-center mb-3">
+                    <label for="Seller" class="fw-semibold fs-5">Seller :</label>
+                    <select name="Seller" class="py-2 px-3 w-auto border border-1 border-primary text-center">
+                            <option selected value="Unkonu">Unkonu</option>
+                    </select>
+                </div>
+                <input type="text" class="id_client d-none" readonly>
+                <div class="btns-update d-flex gap-3 justify-content-center mt-2">
+                    <button type="button" class="btn btn-success py-2 px-3" onclick="modify()">Update</button>
+                    <button type="button" class="btn btn-secondary py-2 px-3"  data-bs-dismiss="offcanvas" aria-label="Close" onclick="deletealert()">Close</button>
+                </div>
+                
+                
+            </form>
         </div>
     </div>
     <script src="js/script.js"></script>
