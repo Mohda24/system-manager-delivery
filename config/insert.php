@@ -10,7 +10,7 @@ $data = json_decode($jsonData, true);
 
 if(isset($data["name"]) && isset($data["tel"]) && isset($data["adresse"]) && isset($data["qnt"]) && isset($data["statu"]) && isset($data["prix"]) && isset($data["seller"])) {
     // Prepare and execute the SQL query using prepared statements
-    $query = "INSERT INTO clients (id_user, nom_client, tel_client, adres_client, Qnt,statu, prix,seller) VALUES (:id_user, :nom_client, :tel_client, :adres_client, :Qnt, :statu, :prix, :seller)";
+    $query = "INSERT INTO clients (id_user, nom_client, tel_client, adres_client, Qnt,statu, prix,seller,date) VALUES (:id_user, :nom_client, :tel_client, :adres_client, :Qnt, :statu, :prix, :seller ,:date)";
     $stmt = $conn->prepare($query);
     
     // Execute the query with the provided values
@@ -22,7 +22,8 @@ if(isset($data["name"]) && isset($data["tel"]) && isset($data["adresse"]) && iss
         ':Qnt' => $data["qnt"],
         ':statu' => $data["statu"],
         ':prix' => $data["prix"],
-        ':seller' => $data["seller"]
+        ':seller' => $data["seller"],
+        ':date' => date("Y-m-d")
     ]);
     
     if ($stmt->rowCount() > 0) {

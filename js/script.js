@@ -1,6 +1,8 @@
 // dsiplay data
 window.onload = function() {
     displaydata();
+    populateSellers(".form select.seller");
+    populateSellers(".offcanvas .seller select");
 };
 // Delete Alert
 function deletealert(){
@@ -107,11 +109,15 @@ function displaydata(){
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0">${element["seller"]}</span></td>
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0 last">
                         <i class="fa-solid fa-pen-to-square fs-5 text-primary" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop" onclick="update(${element["id_client"]})"></i>
-                        <i class="fa-solid fa-trash ms-2 me-1 text-danger fs-5" onclick="delete(${element["id_client"]})"></i></span></td>
-                    </tr>`
+                        <a href="#" data-bs-toggle="modal" data-id="${element["id_client"]}"data-bs-target="#delete" onclick="AreDelete(${element["id_client"]})">
+                        <i class="fa-solid fa-trash ms-2 me-1 text-danger fs-5"></i>
+                        </a>
+                        </span></td>
+                </tr>`
             });
             tbody.innerHTML=mydata
             totalAmont();
+            populateSellers()
             
 
         }
@@ -155,7 +161,7 @@ xml.send(data);
 }
 // logout function
 function logout(){
-     xml=new XMLHttpRequest();
+    xml=new XMLHttpRequest();
     xml.onload=function(){
         if(this.status===200){
             window.location.href ="login.php";
@@ -180,14 +186,14 @@ function update(elem){
             document.querySelector(".offcanvas .Qnt input").value=data.Qnt;
             document.querySelector(".offcanvas .statu select").value=data.statu;
             document.querySelector(".offcanvas .Prix input").value=data.prix;
-            document.querySelector(".offcanvas .Seller select").value=data.seller;
+            document.querySelector(".offcanvas select.seller").value=data.seller;
             document.querySelector(".offcanvas .id_client").value=data.id_client;
             
 
         }
     }
     
-    xml.open("GET","./config/update.php?id="+elem)
+    xml.open("GET","./config/update.php?id="+elem+"&table=clients")
     xml.send();
 }
 function modify(){
@@ -198,7 +204,7 @@ function modify(){
     let Qnt=document.querySelector(".offcanvas .Qnt input").value;
     let statu=document.querySelector(".offcanvas .statu select").value;
     let prix=document.querySelector(".offcanvas .Prix input").value;
-    let seller=document.querySelector(".offcanvas .Seller select").value;
+    let seller=document.querySelector(".offcanvas select.seller").value;
     if(!nom_client || !tel_client || !adres_client || ! Qnt || ! statu || ! prix || ! seller){
         let prob=document.querySelector(".offcanvas .prob_modify")
         prob.innerHTML="Please fill in all required fields"
@@ -224,6 +230,8 @@ function modify(){
     xml.onload = function() {
         if (this.readyState == 4 && this.status == 200) {
             displaydata();
+            hideOffcanvas()
+
             
             
         }}
@@ -231,12 +239,74 @@ xml.setRequestHeader("Content-Type","application/json");
 xml.send(data);
 
 }
-// close 
-function close(){
-    let prob = document.querySelector(".offcanvas .prob_modify");
-    prob.innerHTML = "";
-    prob.classList.remove("alert", "alert-danger", "text-center", "p-2");
 
-};
+// function of delete
+function AreDelete(arg) {
+    btn = document.getElementById("confirmDeleteBtn");
+    btn.addEventListener("click", function() {
+        Delete(arg);
+    });
+}
+
+// function of delete
+function Delete(x){
+    let xml = new XMLHttpRequest();
+    data=JSON.stringify([x])
+    xml.open("Delete","./config/delete.php")
+    xml.onload=function(){
+        if(this.status==200){
+            displaydata();
+            let modal = document.getElementById("delete");
+            let modalInstance = bootstrap.Modal.getInstance(modal);
+            modalInstance.hide();
+        }
+
+    }
+    
+    xml.setRequestHeader("Content-Type","application/json");
+    xml.send(data)
+
+}
+// fUNction of hide offcanvas
+function hideOffcanvas() {
+    var offcanvasElement = document.getElementById('staticBackdrop');
+    var offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+    offcanvas.hide();
+}
+
+// get sellers
+// Function to fetch sellers data and populate the select element
+function populateSellers(arg) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', './config/get_sellers.php', true);
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            var sellers = JSON.parse(this.responseText);
+            console.log(sellers);
+            var select = document.querySelector(arg)
+
+            // Clear existing options
+            select.innerHTML = '';
+
+            // Add "Unkonu" option manually
+            var unkonu = document.createElement('option');
+            unkonu.value = 'Unkonu';
+            unkonu.textContent = 'Unkonu';
+            select.appendChild(unkonu);
+
+            // Populate select with fetched data
+            sellers.forEach(function(seller) {
+                var option = document.createElement('option');
+                option.value = seller. seller_nom;
+                option.textContent = seller. seller_nom;
+                select.appendChild(option);
+            });
+        }
+    };
+    xhr.send();
+}
+
+
+
 
 

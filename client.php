@@ -47,9 +47,9 @@ if($_SESSION['user']){
                 </a>
             </li>
             <li>
-                <a href="">
-                <i class="fa-regular fa-folder-open icon text-danger"></i>
-                    <p class="title text-danger fw-bold">Orders</p>
+                <a href="home.php">
+                <i class="fa-regular fa-folder-open icon"></i>
+                    <p class="title">Orders</p>
                 </a>
             </li>
             <li>
@@ -60,8 +60,8 @@ if($_SESSION['user']){
             </li>
             <li>
                 <a href="client.php">
-                <i class="fa-solid fa-user-group icon"></i>
-                <p class="title">Clients</p>
+                <i class="fa-solid fa-user-group icon text-danger"></i>
+                <p class="title text-danger fw-bold">Clients</p>
                 </a>
             </li>
             <li>
@@ -108,13 +108,11 @@ if($_SESSION['user']){
             <table class="m-auto">
                 <thead class="pb-4">
                     <tr class="">
-                        <th>nom</th>
-                        <th>Tel</th>
+                        <th>raison social</th>
+                        <th>Télèphone</th>
                         <th>Adresse</th>
-                        <th>Qnt</th>
-                        <th>Statu</th>
-                        <th>Prix</th>
-                        <th>Seller</th>
+                        <th>Tarif</th>
+                        <th>Type de colis</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -131,21 +129,13 @@ if($_SESSION['user']){
                                 <input type="text" name="adresse" class="adresse" placeholder="adresse" required>
                             </td>
                             <td>
-                                <input type="number" name="qnt" min="" class="qnt" placeholder="Qnt" required>
+                                <input type="number" name="tarif" min="0" class="tarif" placeholder="tarif" required>
                             </td>
                             <td>
-                                <select name="statu" class="statu">
-                                    <option selected value="en coeur">en coeur</option>
-                                    <option value="Livré">Livré</option>
-                                    <option value="retourné">retourné</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="number" name="prix" class="prix" placeholder="Prix" required>
-                            </td>
-                            <td>
-                            <select name="seller" class="seller">
-                                    <option selected value="Unkonu">Unkonu</option>
+                                <select name="type" class="type">
+                                    <option selected value="grand taille">grand taille</option>
+                                    <option value="medium taille">medium taille</option>
+                                    <option value="petit taille">petit taille</option>
                                 </select>
                             </td>
                             <td>
@@ -227,29 +217,20 @@ if($_SESSION['user']){
                     <label for="Adresse" class="fw-semibold fs-5">Adresse :</label>
                     <input type="text" class="py-2 px-3 w-auto border border-1 border-primary" name="Adresse" placeholder="enter ur Adresse">
                 </div>
-                <div class="Qnt d-flex justify-content-between align-items-center mb-3">
-                    <label for="Qnt" class="fw-semibold fs-5">Qnt :</label>
-                    <input type="number" min="1" class="py-2 px-3 w-auto border border-1 border-primary" name="Qnt" placeholder="enter Qnt">
+                <div class="tarif d-flex justify-content-between align-items-center mb-3">
+                    <label for="tarif" class="fw-semibold fs-5">Tarif :</label>
+                    <input type="number" min="1" class="py-2 px-3 w-auto border border-1 border-primary" name="Qnt" placeholder="enter Tarif">
                 </div>
-                <div class="statu d-flex justify-content-between align-items-center mb-3">
-                    <label for="statu" class="fw-semibold fs-5">Statu :</label>
-                    <select name="statu" class="py-2 px-3 w-auto border border-1 border-primary text-center">
-                            <option selected value="en coeur">en coeur</option>
-                            <option value="Livré">Livré</option>
-                            <option value="retourné">retourné</option>
+                <div class="type d-flex justify-content-between align-items-center mb-3">
+                    <label for="type" class="fw-semibold fs-5">type :</label>
+                    <select name="type" class="py-2 px-3 w-auto border border-1 border-primary text-center">
+                            <option selected value="grand taille">grand taille</option>
+                            <option value="medium taille">medium taille</option>
+                            <option value="petit taille">petit taille</option>
                     </select>
                 </div>
-                <div class="Prix d-flex justify-content-between align-items-center mb-3">
-                    <label for="prix" class="fw-semibold fs-5">prix :</label>
-                    <input type="number" min="0" class="py-2 px-3 w-auto border border-1 border-primary" name="prix" placeholder="enter Prix">
-                </div>
-                <div class="seller d-flex justify-content-between align-items-center mb-3">
-                    <label for="seller" class="fw-semibold fs-5">Seller :</label>
-                    <select name="seller" class="seller py-2 px-3 w-auto border border-1 border-primary text-center">
-                            <option selected value="Unkonu">Unkonu</option>
-                    </select>
-                </div>
-                <input type="text" class="id_client d-none" readonly>
+
+                <input type="text" class="id_seller d-none" readonly>
                 <div class="btns-update d-flex gap-3 justify-content-center mt-2">
                     <button type="button" class="btn btn-success py-2 px-3" onclick="modify()">Update</button>
                     <button type="button" class="btn btn-secondary py-2 px-3"  data-bs-dismiss="offcanvas" aria-label="Close" onclick="deletealert()">Close</button>
@@ -264,7 +245,7 @@ if($_SESSION['user']){
 
 
 
-    <script src="js/script.js"></script>
+    <script src="js/sellers.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
