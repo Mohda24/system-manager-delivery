@@ -1,8 +1,12 @@
 # System Manager Delivery
 
-![System Manager Delivery](pic.jpg)
+![System Manager Delivery](pac.jpg)
 
 System Manager Delivery is a web application designed to manage delivery operations efficiently. It provides features for user authentication, real-time data updates, historical tracking of deliveries, and client management.
+
+## Repository Description
+
+This repository contains the source code and files for System Manager Delivery, a web application built using HTML, CSS, Bootstrap, Ajax, PHP, and SQL.
 
 ## Table of Contents
 
