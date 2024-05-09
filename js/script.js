@@ -26,7 +26,7 @@ function totalAmont(){
     xml = new XMLHttpRequest();
     xml.onload = function() {
         if (this.readyState == 4 && this.status == 200) {
-            let data=JSON.parse(this.response)
+            let data=JSON.parse(this.responseText)
             total=document.querySelector(".total")
             total_r=document.querySelector(".total_r")
             total_l=document.querySelector(".total_l")
@@ -105,7 +105,7 @@ function displaydata(){
                         <td><span class="border border-1 border-primary border-start-0 border-end-0">${element["adres_client"]}</span></td>
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0">${element["Qnt"]}</span></td>
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0 fw-bold ${type}">${element["statu"]}</span></td>
-                        <td><span class=" border border-1 border-primary border-start-0 border-end-0">${element["prix"]}</span></td>
+                        <td><span class=" border border-1 border-primary border-start-0 border-end-0">${element["prix"]} Dh</span></td>
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0">${element["seller"]}</span></td>
                         <td><span class=" border border-1 border-primary border-start-0 border-end-0 last">
                         <i class="fa-solid fa-pen-to-square fs-5 text-primary" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop" onclick="update(${element["id_client"]})"></i>
@@ -117,7 +117,7 @@ function displaydata(){
             });
             tbody.innerHTML=mydata
             totalAmont();
-            populateSellers()
+
             
 
         }
@@ -178,8 +178,7 @@ function update(elem){
     let xml = new XMLHttpRequest();
     xml.onload=function(){
         if(this.status===200){
-            data=JSON.parse(this.responseText)
-            console.log(data);
+            data=JSON.parse(this.responseText);
             document.querySelector(".offcanvas .name input").value=data.nom_client;
             document.querySelector(".offcanvas .tel input").value=data.tel_client;
             document.querySelector(".offcanvas .Adresse input").value=data.adres_client;
@@ -282,17 +281,16 @@ function populateSellers(arg) {
     xhr.onload = function() {
         if (xhr.status == 200) {
             var sellers = JSON.parse(this.responseText);
-            console.log(sellers);
             var select = document.querySelector(arg)
 
             // Clear existing options
-            select.innerHTML = '';
+            // select.innerHTML = '';
 
-            // Add "Unkonu" option manually
-            var unkonu = document.createElement('option');
-            unkonu.value = 'Unkonu';
-            unkonu.textContent = 'Unkonu';
-            select.appendChild(unkonu);
+            // // Add "Unkonu" option manually
+            // var unkonu = document.createElement('option');
+            // unkonu.value = 'Unkonu';
+            // unkonu.textContent = 'Unkonu';
+            // select.appendChild(unkonu);
 
             // Populate select with fetched data
             sellers.forEach(function(seller) {

@@ -53,7 +53,7 @@ if($_SESSION['user']){
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="history.php">
                 <i class="fa-solid fa-file-waveform icon"></i>
                 <p class="title">Historique</p>
                 </a>
