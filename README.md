@@ -54,4 +54,4 @@ If you want to contribute to System Manager Delivery, follow these guidelines:
 
 ## License
 
-System Manager Delivery is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute this software under the terms of the license.
+System Manager Delivery is licensed under the [MIT License](LICENSE.txt). You are free to use, modify, and distribute this software under the terms of the license.
